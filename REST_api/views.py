@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import psycopg2
 
 
 # Create your views here.
@@ -8,6 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 def autoComplete(request):
 
     if request.method == 'GET':
+        conn = psycopg2.connect("dbname= user=postgres")
         response = request.GET.dict()
         print("resu:::",response['q'])
         return JsonResponse({'Status Code':'200'})

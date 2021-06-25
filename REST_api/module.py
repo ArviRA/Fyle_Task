@@ -1,6 +1,6 @@
 import psycopg2
 
-
+conn = None
 
 def RecordTodict(records):
     dummy_list = []
@@ -17,13 +17,20 @@ def RecordTodict(records):
     return dummy_list
 def getConnection():
     try:
+        global conn
         conn = psycopg2.connect(" dbname ='bdiwtqgl1vkip8zcuux5' user='u66vht9deo5ggcgnjz73'  host='bdiwtqgl1vkip8zcuux5-postgresql.services.clever-cloud.com' password='gS7mhQjhtu0MM2yAn0w7'")
-        return conn
+        
+        cur = conn.cursor()
+        return {'status':200,'data':cur}
     except Exception as e:
-        print (e)
-def getRecord(conn):
-    cur = conn.cursor()
-    cur.execute("SELECT * from bank limit 5")
+        return {'status':500,'data':e} 
+def getRecord(cur,code):
+    
+    cur.execute(code)
     records = cur.fetchall()
-    conn.close()
     return RecordTodict(records)
+
+def closeConn():
+    global conn
+    conn.close()
+    return 200

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'REST_api.apps.WebpageConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,8 +76,11 @@ WSGI_APPLICATION = 'FyleTask.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'bdiwtqgl1vkip8zcuux5',
+        'USER' : 'u66vht9deo5ggcgnjz73',
+        'PASSWORD' : 'gS7mhQjhtu0MM2yAn0w7',
+        'HOST' : 'bdiwtqgl1vkip8zcuux5-postgresql.services.clever-cloud.com'
     }
 }
 

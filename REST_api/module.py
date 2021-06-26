@@ -4,7 +4,7 @@ conn = None
 
 def RecordTodict(records):
     dummy_list = []
-    key_list = ['ifsc','bank_id','branch','address','city','district','state','bank_name']
+    key_list = ['ifsc','bank_id','branch','address','city','district','state','bank_name','favourites']
 
     for i in range(len(records)):
             index = 0
@@ -23,7 +23,7 @@ def getConnection():
         cur = conn.cursor()
         return {'status':200,'data':cur}
     except Exception as e:
-        return {'status':500,'data':e} 
+        return {'status':500,'data':str(e)} 
 def getRecord(cur,code):
     
     cur.execute(code)
@@ -34,3 +34,26 @@ def closeConn():
     global conn
     conn.close()
     return 200
+
+
+def setFav(ifsc,cur):
+    print("got in")
+    try:
+        res = cur.execute("select favourites from bank where bank.ifsc = '{}' ".format(ifsc))
+        res = cur.fetchall()
+        res = res[0]
+    
+        if  not(res[0]):
+            print("if")
+            cur.execute("UPDATE bank SET favourites = true WHERE ifsc = '{}'".format(ifsc))
+            conn.commit()
+        else:
+            cur.execute("UPDATE bank SET favourites = false WHERE ifsc = '{}'".format(ifsc))
+            conn.commit()
+        return "DOne"
+
+
+
+    except Exception as e:
+        return {'status':500,'data':str(e)}
+    

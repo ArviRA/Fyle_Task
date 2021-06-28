@@ -10,7 +10,6 @@ def RecordTodict(records):
             index = 0
             bank_dict = {}
             for j in records[i]:
-                print(j)
                 bank_dict[key_list[index]] = j
                 index = index + 1
             dummy_list.append(bank_dict)
@@ -29,6 +28,12 @@ def getRecord(cur,code):
     cur.execute(code)
     records = cur.fetchall()
     return RecordTodict(records)
+
+def getCount(cur,code):
+    cur.execute(code)
+    records = cur.fetchall()
+    print(records)
+    return records[0]
 
 def closeConn():
     global conn

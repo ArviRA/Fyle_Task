@@ -1,1 +1,1 @@
-web: gunicorn FYLETASK.wsgi
+web: gunicorn FyleTask.wsgi

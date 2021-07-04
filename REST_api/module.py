@@ -5,6 +5,7 @@ conn = None
 def RecordTodict(records):
     dummy_list = []
     key_list = ['ifsc','bank_id','branch','address','city','district','state','bank_name','favourites']
+    #
 
     for i in range(len(records)):
             index = 0
